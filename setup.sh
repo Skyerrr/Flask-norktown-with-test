@@ -1,0 +1,1 @@
+python3 norktown/app.py

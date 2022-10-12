@@ -1,0 +1,42 @@
+{% include "header.html" %} {% import "bootstrap/wtf.html" as wtf %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({{ url_for('static', filename='img/post-bg.jpg') }})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{person.name}}</h1>
+                    <h2 class="subheading">{{person.email}}</h2>
+                    <span class="meta">Person name <a href="#">{{person.name}}</a> created on
+                        {{person.date.strftime('%d-%m-%Y')}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% for vehicle in person.vehicle %}
+
+                <p>
+                    Name: {{vehicle.vehicle_name}} Color: {{vehicle.vehicle_color}}{% if vehicle.sale %} Sale: Yes {%
+                    else %} Sale: No {% endif %}
+                </p>
+                {% endfor %}
+                {% if current_user.id == 1 %}
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right"
+                        href="{{ url_for('routes.edit_person', person_id=person.id) }}">Edit
+                        Person Vehicles
+                        &rarr;</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>
+<hr>
+{% include "footer.html" %}

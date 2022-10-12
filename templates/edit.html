@@ -1,0 +1,48 @@
+{% import "bootstrap/wtf.html" as wtf %} {% block content %} {% include "header.html" %}
+<!-- Page Header-->
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading f-color">
+                    <h1 class="f-color">Editar {{person.name}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        {% for vehicle in person.vehicle %}
+
+        <div class="col">
+            <h4 class="fs-sm text-uppercase pt-1 mb-2 text-info">({{vehicle.vehicle_name}}|{{vehicle.vehicle_color}})
+                Click to Delete -> <a
+                    href="{{url_for('routes.delete_vehicle', vehicle_id=vehicle.id, person_id=person.id)}}" target=""><i
+                        class="fa-solid fa-x fa-cog"></i></a></h4>
+        </div>
+        {% endfor %}
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7 f-color">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashes f-color">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <p>
+                    {{ wtf.quick_form(form, novalidate=False, button_map={"submit": "primary"}) }}
+                </p>
+            </div>
+        </div>
+    </div>
+    >
+</article>
+<hr>
+<script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+{% endblock %}
+{% include "footer.html" %}

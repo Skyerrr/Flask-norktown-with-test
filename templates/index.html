@@ -1,0 +1,46 @@
+{% include "header.html" %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('static/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">A Blog made by Felipe Gimenes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% if all_persons %}
+            {% for person in all_persons %}
+            <div class="post-preview">
+                <a href="{{ url_for('routes.show_person', person_id=person.id) }}">
+                    <h2 class="post-title">
+                        {{person.name}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{person.email}}
+                    </h3>
+                    <h3 class="post-subtitle">
+                        Vehicles: {{person.vehicle|count}}
+                    </h3>
+                </a>
+                <p class="post-meta">My name is <a href="#">{{person.name}}</a> created on
+                    {{person.date.strftime('%d-%m-%Y')}}
+                </p>
+            </div>
+            <hr> {% endfor %} {% endif %}
+            <!-- Pager -->
+            {% if current_user.id == 1: %}
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="{{url_for('routes.register')}}">Add New Person</a>
+            </div> {% endif %}
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
