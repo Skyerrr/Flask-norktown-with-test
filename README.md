@@ -13,7 +13,7 @@ Docker:
 docker run -p 5000:5000 felipegimenes/norktown:latest
 
 Login:
-email: admin@admin.com
+email: admin@admin.com <br>
 pass: admin
 
 To be implemented:
